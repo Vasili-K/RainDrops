@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raindrops Game</title>
+    <link rel="stylesheet" href="styles3.css">
+    <link rel="stylesheet" href="StylesCalc3.css">
+    <link rel="stylesheet" href="waves.css">
+</head>
+
+<body>
+    <div class="application__container">
+        <div class="leftSideWrapper">
+            <button class="full__screen">FS</button>
+            <div class="finalResult1">
+
+            </div>
+
+            <div class="seaLevel">
+                <div class="wavesContainer">
+                    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave"
+                                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                            <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="rightSideWrapper">
+            <div class="scoreBoard">
+
+            </div>
+            <div class="inputNumbers">
+                <div class="calc__display">
+                    <input class="calc-display-input" type="text" id="display" value="">
+                </div>
+
+                <div class="buttons">
+
+                    <div>
+                        <button type="button" class="number btn" data-key="103">7</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="104">8</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="105">9</button>
+                    </div>
+                    <div id="clear">
+                        <button type="button" class="clear_btn btn" id="c">Clear</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="100">4</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="101">5</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="102">6</button>
+                    </div>
+                    <div id="resultBtn">
+                        <button type="button" class="operator btn btn-equal-height" id="result"
+                            data-key="13">Enter</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="97">1</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="98">2</button>
+                    </div>
+                    <div>
+                        <button type="button" class="number btn" data-key="99">3</button>
+                    </div>
+
+                    <div id="btn-long">
+                        <button type="button" class="number btn" data-key="96">0</button>
+                    </div>
+                    <div class="press">
+                        <button type="button" class="clear_btn btn" id="ce">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="startScreen">
+                <div id="how-to-playBtn">
+                    <button type="button" class="startButton automaticPlay">How To Play &#10067</button>
+                </div>
+                <div id="playBtn">
+                    <button type="button" class="startButton startPlaying">Play &#128142</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <audio class="bonk" src="Sounds/zvukkapli.mp3"></audio>
+    <audio class="rainSound" src="Sounds/oceanWaves.mp3"></audio>
+    <audio class="shlop" src="Sounds/shlop.mp3"></audio>
+
+    <script src="raindrop9.js"></script>
+</body>
+
+</html>

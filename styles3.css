@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.application__container {
+  background: lightcoral;
+  max-width: 900px;
+  min-width: 320px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.leftSideWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 65%;
+  position: relative;
+  background-image: url(85.svg);
+}
+
+.rightSideWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: rgb(162, 221, 162);
+  width: 35%;
+  position: relative;
+}
+
+.rainDrop {
+  display: flex;
+  align-items: center;
+  background: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.scoreBoard {
+  background: burlywood;
+  width: 98%;
+  max-width: 270px;
+  height: 40px;
+  margin: 0 auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 0 0 40px 40px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.hidden {
+  position: absolute;
+  top: -60px;
+  left: 0;
+}
+
+.startScreen {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 12%;
+}
+
+.startButton {
+  margin: 10px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.automaticPlay {
+  background: cornflowerblue;
+}
+
+.startPlaying {
+  background: rgb(66, 151, 66);
+}
+.finalResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 40%;
+  background: lightskyblue;
+  border-radius: 20px;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  font-size: 24px;
+}
+
+.full__screen {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 30px;
+}
+
+@media (max-width: 560px) {
+  .leftSideWrapper {
+    width: 55%;
+  }
+  .rightSideWrapper {
+    width: 45%;
+  }
+  .scoreBoard {
+    width: 80%;
+    height: 30px;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-size: 18px;
+  }
+  .finalResult {
+    font-size: 14px;
+  }
+  .startButton {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .leftSideWrapper {
+    width: 50%;
+  }
+  .rightSideWrapper {
+    width: 50%;
+  }
+  .scoreBoard {
+    width: 60%;
+  }
+}
