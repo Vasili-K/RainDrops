@@ -24,16 +24,12 @@ const display = document.getElementById("display");
 const scoreBoard = document.querySelector(".scoreBoard");
 const wavesContainer = document.querySelector(".wavesContainer");
 const MemoryCurrentNumber = 0;
-const MemoryNewNumber = false;
 let Answer = "m";
 let valueScore = 0;
 let plusScore = 10;
 
 const applicationContainer = document.querySelector(".application__container");
 const fullScreen = applicationContainer.querySelector(".full__screen");
-let fullScreenEnabled = !!document.fullscreenEnabled;
-
-scoreBoard.innerText = `Score:  ${valueScore}`;
 
 const seaLevel = document.querySelector(".seaLevel");
 const leftHalf = document.querySelector(".leftSideWrapper");
@@ -56,17 +52,16 @@ for (let i = 0; i < clearBtns.length; i++) {
     clear(e.srcElement.id);
   });
 }
+(function setScore() {
+  scoreBoard.innerText = `Score:  ${valueScore}`;
+})();
 
 function numberPress(number) {
-  if (MemoryNewNumber) {
-    display.value = number;
-  } else {
     if (display.value === "") {
       display.value = number;
     } else {
       display.value += number;
     }
-  }
 }
 
 function clear(id) {
@@ -77,7 +72,7 @@ function clear(id) {
   }
 }
 
-function result() {
+function onResultClick() {
   Answer = +display.value;
   display.value = "";
   if (parseFloat(state["currentAnswer"]) === parseFloat(Answer)) {
@@ -87,11 +82,11 @@ function result() {
     plusScore++;
     state["counter1"]++;
     scoreBoard.innerText = `Score: ${valueScore}`;
-    add();
+    createDrop();
   }
 }
 
-function resultKey(e) {
+function onResultKeyClick(e) {
   if (e.type === "keypress") {
     if (e.which == 13 || e.keyCode == 13) {
       Answer = +display.value;
@@ -103,7 +98,7 @@ function resultKey(e) {
         plusScore++;
         state["counter1"]++;
         scoreBoard.innerText = `Score: ${valueScore}`;
-        add();
+        createDrop();
       }
     }
   }
@@ -129,10 +124,10 @@ function generator() {
   state["currentNumber1"] = numberOne;
   state["currentNumber2"] = numberTwo;
   state["currentOperator"] = operator;
-  state["currentAnswer"] = basicOp(operator, numberOne, numberTwo);
+  state["currentAnswer"] = getBasicOperators(operator, numberOne, numberTwo);
 }
 
-function basicOp(operator, numberOne, numberTwo) {
+function getBasicOperators(operator, numberOne, numberTwo) {
   switch (operator) {
     case "+":
       return numberOne + numberTwo;
@@ -147,7 +142,7 @@ function basicOp(operator, numberOne, numberTwo) {
   }
 }
 
-function add() {
+function createDrop() {
   document.querySelector(".rainSound").play();
   generator();
   if (
@@ -174,7 +169,7 @@ function add() {
 
     dropping(drop);
   } else {
-    add();
+    createDrop();
   }
 }
 
@@ -184,7 +179,7 @@ function deleteDrop() {
 
 function starNewGame() {
   state["starTime"] = new Date();
-  add();
+  createDrop();
 }
 
 function dropping(drop) {
@@ -209,7 +204,7 @@ function dropping(drop) {
         scoreBoard.innerText = `Score: ${valueScore}`;
         seaLevel.style.height = seaHeight + 40 + "px";
         state["counter"]++;
-        if (state["counter"] < 3) add();
+        if (state["counter"] < 3) createDrop();
         else {
           setTimeout(createFinalResult, 0);
           seaLevel.style.height = 0 + "px";
@@ -219,6 +214,7 @@ function dropping(drop) {
           state["gameTime"] = Math.floor(
             (state["finishTime"] - state["starTime"]) / 1000
           );
+          clearInterval(timer); 
         }
       } else if (rainDropTop == 0) {
         stopTimer = true;
@@ -253,8 +249,8 @@ function isFullScreen() {
   return !!(document.fullScreen || document.webkitIsFullScreen);
 }
 
-resultButton.addEventListener("click", result);
-display.addEventListener("keypress", resultKey);
+resultButton.addEventListener("click", onResultClick);
+display.addEventListener("keypress", onResultKeyClick);
 startPlaying.addEventListener("click", starNewGame);
 
 fullScreen.addEventListener("click", toggleFullscreen);
