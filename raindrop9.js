@@ -52,9 +52,23 @@ for (let i = 0; i < clearBtns.length; i++) {
     clear(e.srcElement.id);
   });
 }
-(function setScore() {
+function setScore(valueScore) {
   scoreBoard.innerText = `Score:  ${valueScore}`;
-})();
+};
+
+function onResultButtons () {
+  Answer = +display.value;
+  display.value = "";
+  if (parseFloat(state["currentAnswer"]) === parseFloat(Answer)) {
+    deleteDrop();
+    document.querySelector(".bonk").play();
+    valueScore = valueScore + plusScore;
+    plusScore++;
+    state["counter1"]++;
+    setScore(valueScore);
+    createDrop();
+  }
+}
 
 function numberPress(number) {
     if (display.value === "") {
@@ -73,33 +87,13 @@ function clear(id) {
 }
 
 function onResultClick() {
-  Answer = +display.value;
-  display.value = "";
-  if (parseFloat(state["currentAnswer"]) === parseFloat(Answer)) {
-    deleteDrop();
-    document.querySelector(".bonk").play();
-    valueScore = valueScore + plusScore;
-    plusScore++;
-    state["counter1"]++;
-    scoreBoard.innerText = `Score: ${valueScore}`;
-    createDrop();
-  }
+  onResultButtons ();
 }
 
 function onResultKeyClick(e) {
   if (e.type === "keypress") {
     if (e.which == 13 || e.keyCode == 13) {
-      Answer = +display.value;
-      display.value = "";
-      if (parseFloat(state["currentAnswer"]) === parseFloat(Answer)) {
-        deleteDrop();
-        document.querySelector(".bonk").play();
-        valueScore = valueScore + plusScore;
-        plusScore++;
-        state["counter1"]++;
-        scoreBoard.innerText = `Score: ${valueScore}`;
-        createDrop();
-      }
+      onResultButtons ();
     }
   }
 }
@@ -201,7 +195,7 @@ function dropping(drop) {
         document.querySelector(".shlop").play();
         drop.innerText = "";
         valueScore = valueScore - plusScore;
-        scoreBoard.innerText = `Score: ${valueScore}`;
+        setScore(valueScore);
         seaLevel.style.height = seaHeight + 40 + "px";
         state["counter"]++;
         if (state["counter"] < 3) createDrop();
