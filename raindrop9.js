@@ -200,7 +200,6 @@ function dropping(drop) {
         state["counter"]++;
         if (state["counter"] < 3) createDrop();
         else {
-          setTimeout(createFinalResult, 0);
           seaLevel.style.height = 0 + "px";
           document.querySelector(".rainSound").pause();
           wavesContainer.style.display = "none";
@@ -208,6 +207,7 @@ function dropping(drop) {
           state["gameTime"] = Math.floor(
             (state["finishTime"] - state["starTime"]) / 1000
           );
+          createFinalResult();
           clearInterval(timer); 
         }
       } else if (rainDropTop == 0) {
@@ -218,16 +218,16 @@ function dropping(drop) {
 }
 
 function createFinalResult() {
-  let gameDuaretion = state["gameTime"];
-  let shownAnswers = state["counter1"];
-  const finalResult = document.createElement("div");
-  finalResult.classList.add("finalResult");
-  leftHalf.prepend(finalResult);
-  finalResult.insertAdjacentHTML(
-    "afterbegin",
-    `<div><p><b><font color="red">Score: ${valueScore} &#128142</font></b></p></div> 
-    <div><p>Right answers: ${shownAnswers}</p></div> <div>Game Time: ${gameDuaretion}s</div>`
-  );
+    let gameDuaretion = state["gameTime"];
+    let shownAnswers = state["counter1"];
+    const finalResult = document.createElement("div");
+    finalResult.classList.add("finalResult");
+    leftHalf.prepend(finalResult);
+    finalResult.insertAdjacentHTML(
+      "afterbegin",
+      `<div><p><b><font color="red">Score: ${valueScore} &#128142</font></b></p></div> 
+      <div><p>Right answers: ${shownAnswers}</p></div> <div>Game Time: ${gameDuaretion}s</div>`
+    );
 }
 
 function toggleFullscreen() {
